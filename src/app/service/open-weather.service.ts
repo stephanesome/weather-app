@@ -13,16 +13,17 @@ const resource = 'weather';
 export class OpenWeatherService {
   constructor(private httpClient: HttpClient) { }
 
-  private static handleError(error: HttpErrorResponse): Observable<never> {
-    return throwError(
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    return throwError(() =>
       'Error - Unable to retrieve Weather Condition for Specified City.');
   }
 
   public getWeatherAtCity(city: string, country: string): Observable<unknown> {
     const params = new HttpParams().set('q', city + ',' + country).set('appid', APPID_HEADER);
     const options = {params, responseType: 'json' as const};
+    // @ts-ignore
     return this.httpClient.get(baseUrl + resource, options).pipe(
-      catchError(OpenWeatherService.handleError)
+      catchError(this.handleError)
     );
   }
 }
