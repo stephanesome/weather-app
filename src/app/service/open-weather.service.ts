@@ -4,7 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
 const baseUrl = 'http://api.openweathermap.org/data/2.5/';
-const APPID_HEADER = 'YOUR_API_ID';
+const APPID_HEADER = 'YOUR_API_ID HERE';
 const resource = 'weather';
 
 @Injectable({
